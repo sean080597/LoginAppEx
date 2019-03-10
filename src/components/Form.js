@@ -1,168 +1,53 @@
 import React, { Component } from 'react'
-import {
-    Text,
-    StyleSheet,
-    View,
-    TextInput,
-    TouchableOpacity,
-} from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 
-import InputValidation from 'react-native-input-validation'
+import {withFormik} from 'formik'
+import Yup from 'yup'
+import { Button } from 'react-native-elements';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+
+import EL_Input from './EL_Input'
 
 export default class Form extends Component {
-
     constructor(props){
         super(props);
-        this.state = {
-            username: '',
-            password: '',
-            confirmPassword: '',
-        };
     }
 
     render() {
         return (
             <View>
                 <View style={styles.container}>
-                    <InputValidation validator="username"
-                    onValidatorExecuted={isValid => console.log(isValid)}
-                    validatorExecutionDelay={100}
-                    placeholder='Username'
-                    placeholderTextColor='rgba(0, 0, 0, 0.3)'
-                    textInputContainerStyle={styles.inputBoxNew}
-                    errorMessage='Username không hợp lệ'
-                    errorMessageStyle={{color: 'red', padding: 0}}
-                    containerStyle={styles.inputBoxContainer}
-                    />
-                    {/* <TextInput style={styles.inputBox} underlineColorAndroid='rgba(0, 0, 0, 0)'
-                    placeholder='Email' placeholderTextColor='rgba(0, 0, 0, 0.3)'
-                    autoCorrect={false} keyboardType='email-address'
-                    selectionColor='rgba(0, 0, 0, 0.5)'
-                    onSubmitEditing={() => this.password.focus()}
-                    onChangeText={(username) => this.setState({username})}
-                    value={this.state.username}
-                    /> */}
-                    <TextInput style={styles.inputBox} underlineColorAndroid='rgba(0, 0, 0, 0)'
-                    placeholder='Password' placeholderTextColor='rgba(0, 0, 0, 0.3)'
-                    selectionColor='rgba(0, 0, 0, 0.5)'
-                    ref={(input) => this.password = input}
-                    secureTextEntry
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
-                    label='Password'
-                    />
-                    {this.props.type != 'Login' && <TextInput style={styles.inputBox} underlineColorAndroid='rgba(0, 0, 0, 0)'
-                    placeholder='Confirm Password' placeholderTextColor='rgba(0, 0, 0, 0.3)'
-                    selectionColor='rgba(0, 0, 0, 0.5)'
-                    secureTextEntry
-                    onChangeText={(confirmPassword) => this.setState({confirmPassword})}
-                    value={this.state.confirmPassword}
-                    label='Confirm Password'
-                    />}
+                    <EL_Input lable="Email" placeholder="Enter email" icon_name="at" input_type="email-address"/>
+                    <EL_Input lable="Password" placeholder="Enter password" icon_name="key" input_type="default"/>
+                    {this.props.type != 'Login' && <EL_Input label="ConfirmPassword" placeholder="Enter confirm password"/>}
                 </View>
-                <TouchableOpacity style={styles.btnContainer} onPress={this.loginOrRegis}>
-                    <Text style={styles.btnText}>{this.props.type}</Text>
-                </TouchableOpacity>
+                <Button title="Submit" type="solid" buttonStyle={styles.btnContainer} titleStyle={styles.btnText}/>
             </View>
         )
-    }
-
-    loginOrRegis = ()=>{
-        if(this.props.type == 'Login'){
-            alert('Login');
-            // fetch('http://192.168.1.6:4545/login', {
-            //     method: "POST",
-            //     headers: {
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         username: "Justin", password: "Robot"
-            //     })
-            // })
-            // .then((response) => response.json())
-            // .then((res) => {
-            //     alert(res.message);
-            //     // if(res.success === true){
-            //     //     var username = res.message;
-            //     //     //AsyncStorage to store the users username
-            //     //     AsyncStorage.setItem('username', username);
-            //     //     //redirect to memberarea
-            //     //     this.props.navigator.push({
-            //     //         id: 'Memberarea'
-            //     //     });
-            //     // }else{
-            //     //     alert(res.message);
-            //     // }
-            // })
-            // .done();
-        }else{
-             fetch('http://192.168.1.184:4545/register', {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: this.state.username,
-                    password: this.state.password,
-                    confirmPassword: this.state.confirmPassword
-                })
-            })
-            .then((response) => response.json())
-            .then((res) => {
-                alert(res.message);
-                // if(res.success === true){
-                //     var username = res.message;
-                //     //AsyncStorage to store the users username
-                //     AsyncStorage.setItem('username', username);
-                //     //redirect to memberarea
-                //     this.props.navigator.push({
-                //         id: 'Memberarea'
-                //     });
-                // }else{
-                //     alert(res.message);
-                // }
-            })
-            .done();
-        }
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        margin: 20,
-        padding: 20,
+        margin: moderateScale(20),
+        padding: moderateScale(15),
+        paddingBottom: 0,
         borderWidth: 1,
         borderColor: '#FFFFFF',
         backgroundColor: 'rgba(255, 255, 255, 0.25)',
     },
-    inputBox: {
-        fontSize: 16,
-        height: 40,
-        padding: 10,
-        marginBottom: 10,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    },
-    inputBoxContainer: {
-        marginBottom: 10,
-    },
-    inputBoxNew: {
-        paddingHorizontal: 5,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    },
     btnContainer: {
-        margin: 20,
+        margin: moderateScale(20),
         marginVertical: 0,
-        padding: 20,
-        backgroundColor: 'blue',
+        padding: moderateScale(15),
         borderWidth: 1,
         borderColor: '#fff',
         backgroundColor: 'rgba(255, 255, 255, 0.6)',
     },
     btnText: {
-        fontSize: 16,
+        fontSize: moderateScale(20, 0.4),
         fontWeight: 'bold',
         textAlign: 'center',
+        color: '#616161'
     },
 });

@@ -6,7 +6,6 @@ import {
     ImageBackground,
     TextInput,
     TouchableOpacity,
-    AsyncStorage
 } from 'react-native'
 import {Actions} from 'react-native-router-flux'
 
