@@ -1,25 +1,32 @@
 import React, { PureComponent } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 export default class EL_Input extends PureComponent {
-  state = {}
+  _handleChange = (value) => {
+    this.props.onChange(this.props.name, value);
+  }
+
+  _handleTouch = () => {
+    this.props.onTouch(this.props.name);
+  }
+
   render() {
-    const { input_type, placeholder, icon_name } = this.props
+    const { error, ...rest } = this.props
     return (
       <View style={styles.root}>
         <Input
           // label={label}
-          placeholder={placeholder}
-          leftIcon={{ type: 'font-awesome', name: icon_name, color: '#616161'}}
+          {...rest}
           inputStyle={styles.inputBox}
           inputContainerStyle={styles.inputContainer}
-          keyboardType={input_type}
           underlineColorAndroid='rgba(0, 0, 0, 0)'
           selectionColor='rgba(0, 0, 0, 0.5)'
           placeholderTextColor='rgba(0, 0, 0, 0.3)'
+          onChangeText={this._handleChange}
+          onBlur={this._handleTouch}
+          errorMessage={error}
         />
       </View>
     )

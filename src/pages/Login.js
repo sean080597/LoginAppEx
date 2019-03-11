@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import {Actions} from 'react-native-router-flux'
 
-
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import Form from '../components/Form'
 
 export default class Login extends Component {
@@ -55,17 +55,17 @@ const styles = StyleSheet.create({
     },
     logoText: {
         color: '#FFFFFF',
-        fontSize: 40,
+        fontSize: moderateScale(40),
         fontStyle: 'italic',
         fontWeight: 'bold',
         textShadowColor: '#252525',
         textShadowOffset: {width: 2, height: 2},
         textShadowRadius: 15,
-        marginBottom: 20,
+        marginBottom: moderateScale(20),
     },
     signupTextCont: {
         justifyContent: 'center',
-        marginVertical: 16,
+        marginVertical: moderateScale(16),
         flexDirection: 'row',
         // position: 'absolute',
         // bottom: 0,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     },
     signupButton: {
         color: '#FFFFFF',
-        fontSize: 16,
+        fontSize: moderateScale(16),
         fontWeight: '500',
     }
 });
