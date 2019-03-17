@@ -27,6 +27,7 @@ export default class EL_Input extends PureComponent {
           onChangeText={this._handleChange}
           onBlur={this._handleTouch}
           errorMessage={error}
+          containerStyle={styles.container}
         />
       </View>
     )
@@ -38,11 +39,13 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
+  container:{
+    marginBottom: moderateScale(10)
+  },
   inputContainer:{
     height: moderateScale(40),
     padding: moderateScale(15),
     paddingHorizontal: 0,
-    marginBottom: verticalScale(10),
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   inputBox: {
