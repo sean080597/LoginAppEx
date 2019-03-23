@@ -11,6 +11,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 var mongoose = require('mongoose');
 var port = process.env.PORT || 5000;
 
+//uses path
+var Users = require('./routes/UserController')
+app.use('/users', Users)
+
 //listen port
 app.listen(port, ()=>{
     console.log("Server is running on port: " + port)
@@ -22,8 +26,3 @@ const mongoRI = 'mongodb://localhost:27017/mernloginreg'
 mongoose.connect(mongoRI, {useNewUrlParser: true})
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.log(err))
-
-//uses path
-var Users = require('./routes/Users')
-
-app.use('/users', Users)
