@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Alert } from 'react-native'
+import { StyleSheet, View, Alert } from 'react-native'
 
 import { Formik } from 'formik'
 import * as Yup from 'yup'
