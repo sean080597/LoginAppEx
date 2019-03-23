@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   inputBox: {
-    fontSize: moderateScale(17),
+    fontSize: moderateScale(16),
   },
 })

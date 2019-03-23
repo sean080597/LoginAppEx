@@ -42,10 +42,10 @@ export default class Form extends Component {
                     validationSchema={Yup.object().shape({
                         email: Yup.string().email('Not valid email').required('Email is required'),
                         password: Yup.string().min(6).required('Password is required'),
-                        confirmPassword: this.props.type != 'Login' ? Yup.string().oneOf(
-                            [Yup.ref('password', null)],
-                            'Confirm Password must matched Password'
-                        ).required('Confirm Password is required') : null
+                        confirmPassword:
+                            this.props.type != 'Login' ?
+                            Yup.string().oneOf([Yup.ref('password', null)], 'Confirm Password must matched Password')
+                            .required('Confirm Password is required') : null
                     })}
                     render={({values, handleSubmit, setFieldValue, errors, touched, setFieldTouched, isValid, isSubmitting}) => (
                         <React.Fragment>
@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.25)',
     },
     btnContainer: {
+        width: '50%',
+        alignSelf: 'center',
         margin: moderateScale(20),
         marginVertical: 0,
         padding: moderateScale(15),
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.6)',
     },
     btnText: {
-        fontSize: moderateScale(20, 0.4),
+        fontSize: moderateScale(16, 0.4),
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#616161'
